@@ -17,3 +17,5 @@ if (!matchCredentials($username, $password)) {
 
 $_SESSION['isLoggedIn'] = true;
 echo json_encode(["status" => "success"]);
+
+?>
