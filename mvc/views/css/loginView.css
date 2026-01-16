@@ -43,6 +43,7 @@ body {
     color: #444;
 }
 
+
 .login-page input[type="text"],
 .login-page input[type="password"] {
     width: 100%;
@@ -81,4 +82,23 @@ body {
 
 .login-page input[type="submit"]:hover {
     background-color: #ec4c92;
+}
+
+.login-page .fpass{
+    background-color: var(--lg-color);
+  
+    border: none;
+    outline: none;
+    color: rgb(248, 78, 78);
+    display: block;
+    font-family: var(--my-btn-font);
+    font-size: 15px;
+    padding: 10px 0;
+    margin-top: 20px;
+    width: 100%;
+    font-weight: bold;
+    text-transform:uppercase ;
+    transition: all;
+    cursor: pointer;
+
 }

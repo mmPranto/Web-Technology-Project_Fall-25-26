@@ -18,14 +18,17 @@ session_start();
 <input type="text" id="uname" name="uname">
 <span id="usernameError" class="error"></span>
 
-<br><br>
 
 <label>Password</label>
 <input type="password" id="password" name="password">
 <span id="passwordError" class="error"></span>
+<br>
 
-<br><br>
 <input type="submit" value="Login">
+<br><br>
+<button class="fpass" type="button" onclick="window.location.href='ForgotPasswordView.php'">
+    Forget Password?
+</button>
 
 	</form>
 	</main>
