@@ -4,85 +4,37 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Login Form</title>
-	<link rel="stylesheet" href="css/loginView.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/loginView.css">
 </head>
 <body>
-	     <?php include 'header.php'; ?> 
-	<main class="login-page">
-	<form action="../controllers/LoginController.php" method="post">
-		<h1>Login</h1>
-		<label>Username</label>
-<input type="text" id="uname" name="uname">
-<span id="usernameError" class="error"></span>
 
+<?php include 'header.php'; ?>
 
-<label>Password</label>
-<input type="password" id="password" name="password">
-<span id="passwordError" class="error"></span>
-<br>
+<main class="login-page">
+<form action="../controllers/LoginController.php" method="post" onsubmit="return validateLogin()">
+    <h1>Login</h1>
 
-<input type="submit" value="Login">
-<br><br>
-<button class="fpass" type="button" onclick="window.location.href='ForgotPasswordView.php'">
-    Forget Password?
-</button>
+    <label>Username</label>
+    <input type="text" id="uname" name="uname"
+           value="<?= $_SESSION['old_username'] ?? '' ?>">
+    <span class="error"><?= $_SESSION['usernameErrMsg'] ?? '' ?></span>
 
-	</form>
-	</main>
+    <label>Password</label>
+    <input type="password" id="password" name="password">
+    <span class="error"><?= $_SESSION['passwordErrMsg'] ?? '' ?></span>
 
-	<?php include 'footer.php'; ?>
+    <br>
+    <input type="submit" value="Login">
+</form>
+</main>
 
-<script>
-document.querySelector("form").addEventListener("submit", function(e) {
-    e.preventDefault();
+<?php
+// clear messages after showing
+unset($_SESSION['usernameErrMsg'], $_SESSION['passwordErrMsg'], $_SESSION['old_username']);
+?>
 
-    let username = document.getElementById("uname").value.trim();
-    let password = document.getElementById("password").value.trim();
-
-    document.getElementById("usernameError").innerText = "";
-    document.getElementById("passwordError").innerText = "";
-
-    let hasError = false;
-
-    if (username === "") {
-        document.getElementById("usernameError").innerText = "Provide your valid username";
-        hasError = true;
-    }
-
-    if (password === "") {
-        document.getElementById("passwordError").innerText = "Provide your valid password";
-        hasError = true;
-    }
-
-    if (hasError) return;
-
-    // AJAX request
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "../controllers/LoginAjaxController.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-    xhr.onload = function () {
-        let res = JSON.parse(this.responseText);
-
-        if (res.status === "username_error") {
-            document.getElementById("usernameError").innerText = "Invalid username";
-        }
-        else if (res.status === "password_error") {
-            document.getElementById("passwordError").innerText = "Invalid password";
-        }
-        else if (res.status === "success") {
-            window.location.href = "home.php";
-        }
-    };
-
-    xhr.send("uname=" + username + "&password=" + password);
-});
-</script>
-
-
+<script src="js/loginView.js"></script>
 
 </body>
 </html>
