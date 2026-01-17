@@ -34,6 +34,7 @@ session_start();
 	</main>
 
 	<?php include 'footer.php'; ?>
+
 <script>
 document.querySelector("form").addEventListener("submit", function(e) {
     e.preventDefault();
@@ -73,7 +74,7 @@ document.querySelector("form").addEventListener("submit", function(e) {
             document.getElementById("passwordError").innerText = "Invalid password";
         }
         else if (res.status === "success") {
-            window.location.href = "HomeView.php";
+            window.location.href = "home.php";
         }
     };
 

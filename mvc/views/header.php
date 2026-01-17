@@ -1,3 +1,9 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,14 +18,14 @@
         <div class="search-box">
             <select>
                 <option>All Category</option>
-                <option>Motherboard</option>
-                <option>Laptop</option>
-                <option>Monitor</option>
-                <option>Processor</option>
-                <option>Ram</option>
-                <option>SSD</option>
-                <option>Graphics Card</option>
-                <option>Printer</option>
+                <option href="motherboard.php">Motherboard</option>
+                <option href="laptop.php">Laptop</option>
+                <option href="monitor.php">Monitor</option>
+                <option href="processor.php">Processor</option>
+                <option href="ram.php">Ram</option>
+                <option href="ssd.php">SSD</option>
+                <option href="graphics-card.php">Graphics Card</option>
+                <option href="printer.php">Printer</option>
             </select>
             <input type="text" placeholder="Search for products...">
             <button><i class="fas fa-search"></i></button>
@@ -29,10 +35,23 @@
         <i class="fa-solid fa-cart-shopping" onclick="goToCart()"></i>
         <i class="fa-regular fa-user user-icon" onclick="toggleLoginMenu()"></i>
 
-        <div class="login-dropdown" id="loginDropdown">
-            <a href="login.php" class="login-btn">Sign In</a>
-            <a href="registration-form.php" class="create-account">Create An Account</a>
-        </div>
+<div class="login-dropdown" id="loginDropdown">
+
+    <?php if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] === true): ?>
+        <a href="../controllers/LogoutController.php" class="logout-btn">
+            Logout
+        </a>
+
+    <?php else: ?>
+
+        <a href="loginView.php" class="login-btn">Sign In</a>
+        <a href="registration-form.php" class="create-account">Create An Account</a>
+
+    <?php endif; ?>
+
+</div>
+
+
     </div>
     </header>
 
