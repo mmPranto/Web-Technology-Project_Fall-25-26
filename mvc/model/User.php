@@ -16,10 +16,11 @@ function usernameExists($username) {
 
 function matchCredentials($username, $password) {
     $conn = dbConnection();
-    $sql = "SELECT * FROM registration WHERE Username = ? AND Password = ?";
+    $sql = "SELECT Username FROM registration WHERE Username = ? AND Password = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "ss", $username, $password);
     mysqli_stmt_execute($stmt);
-    mysqli_stmt_get_result($stmt);
-    return mysqli_stmt_affected_rows($stmt) === 1;
+    mysqli_stmt_store_result($stmt);
+    return mysqli_stmt_num_rows($stmt) === 1;
 }
+?>
