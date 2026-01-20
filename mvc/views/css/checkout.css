@@ -1,12 +1,10 @@
-* {
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-body {
+.checkout-page {
     background: #f2f4f8;
-    font-family: Arial, sans-serif;
-    margin: 0;
+    min-height: calc(100vh - 200px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
 }
 
 .payment-container {
@@ -14,23 +12,16 @@ body {
     padding: 30px 40px;
     width: 600px;
     border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
 }
-
-.checkout-page {
-    min-height: calc(100vh - 200px); /* footer space */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 0;
-}
-
 
 .payment-container h2 {
     text-align: center;
     margin-bottom: 25px;
     color: #333;
 }
+
 
 .section {
     margin-bottom: 25px;
@@ -41,37 +32,43 @@ body {
     color: #444;
 }
 
-/* Inputs */
-input[type="text"],
-input[type="tel"],
-textarea {
+
+.payment-container input[type="text"],
+.payment-container input[type="tel"],
+.payment-container textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 12px;
     border-radius: 6px;
     border: 1px solid #ccc;
     font-size: 14px;
+    box-sizing: border-box;
 }
 
-textarea {
+.payment-container textarea {
     resize: none;
 }
 
-/* Payment options */
 .payment-option {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    font-size: 14px;
 }
 
 .payment-option input {
     margin-right: 10px;
 }
 
-/* Terms */
 .terms {
     margin: 20px 0;
     font-size: 14px;
+}
+
+.terms label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .terms a {
@@ -83,18 +80,24 @@ textarea {
     text-decoration: underline;
 }
 
-/* Button */
-button {
+.payment-container button {
     width: 100%;
     padding: 14px;
     border: none;
     background: #28a745;
-    color: #fff;
+    color: #ffffff;
     font-size: 17px;
     border-radius: 8px;
     cursor: pointer;
 }
 
-button:hover {
+.payment-container button:hover {
     background: #218838;
+}
+
+@media (max-width: 768px) {
+    .payment-container {
+        width: 90%;
+        padding: 25px;
+    }
 }

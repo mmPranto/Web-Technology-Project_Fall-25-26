@@ -22,59 +22,52 @@ if (!isset($_SESSION['isLoggedIn'])) {
         <h2>Payment & Checkout</h2>
 
     
-        <form id="checkoutForm">
-        <div class="section">
-            <h3>Delivery Address</h3>
+<form action="../controllers/OrderController.php" method="POST">
 
-            <label>Full Name</label>
-            <input type="text" placeholder="Enter your name" required>
+    <label>Full Name</label>
+    <input type="text" name="full_name" required>
 
-            <label>Phone Number</label>
-            <input type="tel" placeholder="01XXXXXXXXX" required>
+    <label>Phone Number</label>
+    <input type="tel" name="phone" required>
 
-            <label>Address</label>
-            <textarea rows="3" placeholder="House, Road, Area, City" required></textarea>
+    <label>Address</label>
+    <textarea name="address" required></textarea>
+
+    <div class="section">
+        <h3>Payment Method</h3>
+
+        <div class="payment-option">
+            <input type="radio" name="payment" value="COD" required>
+            <label>Cash on Delivery</label>
         </div>
 
-        <div class="section">
-            <h3>Payment Method</h3>
-
-            <div class="payment-option">
-                <input type="radio" id="cod" name="payment" required>
-                <label for="cod">Cash on Delivery</label>
-            </div>
-
-            <div class="payment-option">
-                <input type="radio" id="card" name="payment">
-                <label for="card">Credit / Debit Card</label>
-            </div>
-
-            <div class="payment-option">
-                <input type="radio" id="bkash" name="payment">
-                <label for="bkash">bKash</label>
-            </div>
-
-            <div class="payment-option">
-                <input type="radio" id="nagad" name="payment">
-                <label for="nagad">Nagad</label>
-            </div>
+        <div class="payment-option">
+            <input type="radio" name="payment" value="Card">
+            <label>Card</label>
         </div>
 
-   
-        <div class="terms">
-            <input type="checkbox" id="terms" required>
-            <label for="terms">
-                I agree to the <a href="T&C.php">Terms & Conditions</a>
-            </label>
+        <div class="payment-option">
+            <input type="radio" name="payment" value="bKash">
+            <label>bKash</label>
         </div>
 
-        <div class="cart-actions">
-            <button type="submit" id="confirmBtn">
-        Confirm Order
-    </button>
+        <div class="payment-option">
+            <input type="radio" name="payment" value="Nagad">
+            <label>Nagad</label>
         </div>
-        <div></div>
-    </form>
+    </div>
+
+    <div class="terms">
+        <label>
+            <input type="checkbox" required>
+            I agree to the <a href="T&C.php">Terms & Conditions</a>
+        </label>
+    </div>
+
+    <button type="submit">Confirm Order</button>
+</form>
+
+
 </div>
 </main>
 
