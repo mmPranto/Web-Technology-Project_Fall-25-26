@@ -34,6 +34,8 @@ session_start();
 unset($_SESSION['usernameErrMsg'], $_SESSION['passwordErrMsg'], $_SESSION['old_username']);
 ?>
 
+ <?php include 'footer.php'; ?>
+
 <script src="js/loginView.js"></script>
 
 </body>
