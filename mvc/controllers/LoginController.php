@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../model/User.php';
+require_once '../models/User.php';
 
 $username = trim($_POST['uname'] ?? '');
 $password = trim($_POST['password'] ?? '');
