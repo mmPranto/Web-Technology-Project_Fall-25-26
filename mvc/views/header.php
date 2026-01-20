@@ -38,12 +38,14 @@ if (session_status() === PHP_SESSION_NONE) {
 <div class="login-dropdown" id="loginDropdown">
 
     <?php if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] === true): ?>
+        <a href="profile_view.php" class="login-btn">Profile</a>
         <a href="../controllers/LogoutController.php" class="logout-btn">
             Logout
         </a>
 
     <?php else: ?>
 
+        
         <a href="loginView.php" class="login-btn">Sign In</a>
         <a href="registration_view.php" class="create-account">Create An Account</a>
 

@@ -17,6 +17,32 @@ function isValueUnique($column, $value) {
     return $count === 0;
 }
 
+
+function getUserData($uname) {
+    $conn = getDbConnection();
+    $stmt = $conn->prepare("SELECT * FROM registration WHERE Username = ?");
+    $stmt->bind_param("s", $uname);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_assoc();
+}
+
+function updateProfile($fname, $lname, $uname, $email, $pass, $originalUname) {
+    $conn = getDbConnection();
+    
+    if (!empty($pass)) {
+        // Update everything including password
+        $stmt = $conn->prepare("UPDATE registration SET First_name=?, Last_name=?, Username=?, Email=?, Password=? WHERE Username=?");
+        $stmt->bind_param("ssssss", $fname, $lname, $uname, $email, $pass, $originalUname);
+    } else {
+        // Update without changing password
+        $stmt = $conn->prepare("UPDATE registration SET First_name=?, Last_name=?, Username=?, Email=? WHERE Username=?");
+        $stmt->bind_param("sssss", $fname, $lname, $uname, $email, $originalUname);
+    }
+    
+    return $stmt->execute();
+}
+
 function saveUser($fname, $lname, $uname, $email, $pass) {
     $conn = getDbConnection();
     try {
