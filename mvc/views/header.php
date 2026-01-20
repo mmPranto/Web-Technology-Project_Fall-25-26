@@ -45,7 +45,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <?php else: ?>
 
         <a href="loginView.php" class="login-btn">Sign In</a>
-        <a href="registration-form.php" class="create-account">Create An Account</a>
+        <a href="registration_view.php" class="create-account">Create An Account</a>
 
     <?php endif; ?>
 
