@@ -26,6 +26,9 @@ session_start();
 
     <br>
     <input type="submit" value="Login">
+    <div style="margin-top: 15px; text-align: center;">
+    <a href="../views/forgotPasswordView.php" style="text-decoration:none; color:#ec4c92; font-size:14px; font-weight:bold;">FORGOT PASSWORD?</a>
+</div>
 </form>
 </main>
 
