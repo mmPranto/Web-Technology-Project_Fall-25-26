@@ -14,7 +14,7 @@ function renderCart() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     cartItemsEl.innerHTML = "";
 
-    let total = 0; // ✅ FIX: declare total FIRST
+    let total = 0; 
 
     if (cart.length === 0) {
         cartItemsEl.innerHTML = `
@@ -53,7 +53,7 @@ function renderCart() {
 
     totalPriceEl.innerText = "Total: ৳ " + total;
 
-    // ✅ SAVE DATA TO PHP SESSION
+   
     saveCartToSession(cart);
     saveCartTotalToSession(total);
 }
