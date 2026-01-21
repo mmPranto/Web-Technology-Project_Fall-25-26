@@ -1,145 +1,75 @@
+<?php 
+session_start();
+require_once '../models/productModel.php'; 
+// Fetch products specifically for 'graphics card'
+$gpu_items = getProductsByCategory('graphics card'); 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Product Section</title>
+    <title>Graphics Cards - PCStation</title>
     <link rel="stylesheet" href="../views/css/Product.css">
+    <style>
+        /* Ensures exactly 4 items per row */
+        .product-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* Standardize height so cards align perfectly */
+        .product-card h3 {
+            font-size: 13px;
+            height: 45px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+    </style>
 </head>
 <body>
-     <?php include 'header.php'; ?>
-     <?php include 'nav.php'; ?>
+
+<?php include 'header.php'; ?>
+<?php include 'nav.php'; ?>
 
 <section class="product-section">
-    <div class="product-card">
-        <span class="save-badge">Save: ৳ 500</span>
-        <img src="../views/images/graphics card/cover-1764831110_cache_optimize-70.webp" alt="RTX 5070">
+    <?php if (!empty($gpu_items)): ?>
+        <?php foreach ($gpu_items as $product): ?>
+            <div class="product-card">
+                <span class="save-badge">Special Deal</span>
+                
+                <img src="../views/images/graphics card/<?php echo htmlspecialchars($product['image']); ?>" 
+                     alt="<?php echo htmlspecialchars($product['product_name']); ?>">
 
-        <h3>GIGABYTE GEFORCE RTX 3050 WINDFORCE V2 8G GDDR6 GRAPHICS CARD<BR></BR></h3>
+                <h3><?php echo htmlspecialchars($product['product_name']); ?></h3>
 
-        <div class="price">
-            ৳ 30,000 
-        </div>
+                <div class="price">
+                    ৳ <?php echo number_format($product['price']); ?>
+                </div>
 
-        <div class="stock">In Stock</div>
+                <div class="stock">In Stock</div>
 
-        <div class="actions">
-            <button class="icon-btn">❤</button>
-            <button class="icon-btn">⇄</button>
-            <button class="icon-btn cart">🛒</button>
-        </div>
+                <div class="actions">
+                    <button class="icon-btn">❤</button>
+                    <button class="icon-btn">⇄</button>
+                    <button class="icon-btn cart" 
+                            onclick="addToCart(<?php echo $product['price']; ?>, '<?php echo addslashes($product['product_name']); ?>')">
+                        🛒
+                    </button>
+                </div>
 
-        <button class="buy-btn">Buy Now</button>
-    </div>
-
-    <div class="product-card">
-        <span class="save-badge">Save: ৳ 5,001</span>
-        <img src="../views/images/graphics card/cover-1765080095_cache_optimize-70.webp" alt="RTX 5070 Ti">
-
-        <h3>INNO3D GEFORCE RTX 5070 Ti iCHILL X3 16GB GDDR7 GRAPHICS CARD </h3><BR></BR>
-
-        <div class="price">
-            ৳ 119,999  
-        </div>
-
-        <div class="stock">In Stock</div>
-
-        <div class="actions">
-            <button class="icon-btn">❤</button>
-            <button class="icon-btn">⇄</button>
-            <button class="icon-btn cart">🛒</button>
-        </div>
-
-        <button class="buy-btn">Buy Now</button>
-    </div>
-
-    <div class="product-card">
-        <span class="save-badge">Save: ৳ 1,600</span>
-        <img src="../views/images/graphics card/cover-1765087584_cache_optimize-70.webp" alt="RTX 3050">
-
-        <h3>INNO3D GEFORCE RTX 5070 X3 OC 12GB GDDR7 GRAPHICS CARD</h3><BR></BR>
-
-        <div class="price">
-            ৳ 85,900
-        </div>
-
-        <div class="stock">In Stock</div>
-
-        <div class="actions">
-            <button class="icon-btn">❤</button>
-            <button class="icon-btn">⇄</button>
-            <button class="icon-btn cart">🛒</button>
-        </div>
-
-        <button class="buy-btn">Buy Now</button>
-    </div>
-
-        <div class="product-card">
-        <span class="save-badge">Save: ৳ 1,000</span>
-        <img src="../views/images/graphics card/cover-1765517872_cache_optimize-70.webp" alt="RTX 5070 Ti">
-
-        <h3>MAXSUN MS-RX580 2048SP BIG MAC PLUS 8G GRAPHICS CARD</h3>
-
-        <div class="price">
-            ৳ 16,000 
-        </div>
-
-        <div class="stock">In Stock</div>
-
-        <div class="actions">
-            <button class="icon-btn">❤</button>
-            <button class="icon-btn">⇄</button>
-            <button class="icon-btn cart">🛒</button>
-        </div>
-
-        <button class="buy-btn">Buy Now</button>
-    </div>
-
-        <div class="product-card">
-        <span class="save-badge">Save: ৳ 6,000</span>
-        <img src="../views/images/graphics card/cover-1766039893_cache_optimize-70.webp" alt="RTX 5070 Ti">
-
-        <h3>INNO3D GEFORCE RTX 5070 Ti X3 OC 16GB GDDR7 GRAPHICS CARD(WHITE)</h3>
-
-        <div class="price">
-            ৳ 119,900 
-        </div>
-
-        <div class="stock">In Stock</div>
-
-        <div class="actions">
-            <button class="icon-btn">❤</button>
-            <button class="icon-btn">⇄</button>
-            <button class="icon-btn cart">🛒</button>
-        </div>
-
-        <button class="buy-btn">Buy Now</button>
-    </div>
-
-        <div class="product-card">
-        <span class="save-badge">Save: ৳ 2,000</span>
-        <img src="../views/images/graphics card/cover-1766722016_cache_optimize-70.webp" alt="RTX 5070 Ti">
-
-        <h3>GIGABYTE GEFORCE RTX 5060 EAGLE MAX OC 8GB GDDR7 GRAPHICS CARD</h3>
-
-        <div class="price">
-            ৳ 49,000
-        </div>
-
-        <div class="stock">In Stock</div>
-
-        <div class="actions">
-            <button class="icon-btn">❤</button>
-            <button class="icon-btn">⇄</button>
-            <button class="icon-btn cart">🛒</button>
-        </div>
-
-        <button class="buy-btn">Buy Now</button>
-    </div>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p style="text-align:center; width:100%;">No graphics cards currently in stock.</p>
+    <?php endif; ?>
 </section>
 
 <script src="js/addtocart.js"></script>
-
 <?php include 'footer.php'; ?>
-
 </body>
 </html>

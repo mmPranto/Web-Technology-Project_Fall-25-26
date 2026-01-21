@@ -1,147 +1,66 @@
+<?php 
+session_start();
+require_once '../models/productModel.php'; 
+// Fetch only items tagged as 'motherboard'
+$motherboards = getProductsByCategory('motherboard'); 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Product Section</title>
+    <title>Motherboards - PCStation</title>
     <link rel="stylesheet" href="../views/css/Product.css">
+    <style>
+        /* Ensures 4 items per row as requested */
+        .product-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 20px;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
 
+<?php include 'header.php'; ?>
+<?php include 'nav.php'; ?>
 
- <?php include 'header.php'; ?>
- <?php include 'nav.php'; ?>
- 
 <section class="product-section">
-    <div class="product-card">
-        <span class="save-badge">Save: ৳ 500</span>
-        <img src="../views/images/motherboard/cover-1765018944_cache_optimize-70.webp" alt="RTX 5070">
+    <?php if (!empty($motherboards)): ?>
+        <?php foreach ($motherboards as $product): ?>
+            <div class="product-card">
+                <span class="save-badge">Special Price</span>
+                
+                <img src="../views/images/motherboard/<?php echo htmlspecialchars($product['image']); ?>" 
+                     alt="<?php echo htmlspecialchars($product['product_name']); ?>">
 
-        <h3>ASROCK PHANTOM GAMING X870 RIPTIDE WIFI AM5 DDR5 ATX MOTHERBOARD</h3>
+                <h3><?php echo htmlspecialchars($product['product_name']); ?></h3>
 
-        <div class="price">
-            ৳ 43,000 
-        </div>
+                <div class="price">
+                    ৳ <?php echo number_format($product['price']); ?>
+                </div>
 
-        <div class="stock">In Stock</div>
+                <div class="stock">In Stock</div>
 
-        <div class="actions">
-            <button class="icon-btn">❤</button>
-            <button class="icon-btn">⇄</button>
-            <button class="icon-btn cart">🛒</button>
-        </div>
+                <div class="actions">
+                    <button class="icon-btn">❤</button>
+                    <button class="icon-btn">⇄</button>
+                    <button class="icon-btn cart" 
+                            onclick="addToCart(<?php echo $product['price']; ?>, '<?php echo addslashes($product['product_name']); ?>')">
+                        🛒
+                    </button>
+                </div>
 
-        <button class="buy-btn">Buy Now</button>
-    </div>
-
-    <div class="product-card">
-        <span class="save-badge">Save: ৳ 1,100</span>
-        <img src="../views/images/motherboard/cover-1765092149_cache_optimize-70.webp" alt="RTX 5070 Ti">
-
-        <h3>COLORFUL BATTLE-AX B550M-D PRO V14 DDR4 AMD AM4 M-ATX MOTHERBOARD</h3>
-
-        <div class="price">
-            ৳ 10,400 
-        </div>
-
-        <div class="stock">In Stock</div>
-
-        <div class="actions">
-            <button class="icon-btn">❤</button>
-            <button class="icon-btn">⇄</button>
-            <button class="icon-btn cart">🛒</button>
-        </div>
-
-        <button class="buy-btn">Buy Now</button>
-    </div>
-
-    <div class="product-card">
-        <span class="save-badge">Save: ৳ 1,000</span>
-        <img src="../views/images/motherboard/cover-1765513212_cache_optimize-70.webp" alt="RTX 3050">
-
-        <h3>MAXSUN MS-CHALLENGR B850M PLUS WIFI 2x DIMM DDR5 MOTHERBOARD</h3>
-
-        <div class="price">
-            ৳ 16,000
-        </div>
-
-        <div class="stock">In Stock</div>
-
-        <div class="actions">
-            <button class="icon-btn">❤</button>
-            <button class="icon-btn">⇄</button>
-            <button class="icon-btn cart">🛒</button>
-        </div>
-
-        <button class="buy-btn">Buy Now</button>
-    </div>
-
-        <div class="product-card">
-        <span class="save-badge">Save: ৳ 900</span>
-        <img src="../views/images/motherboard/cover-1766124666_cache_optimize-70.webp" alt="RTX 5070 Ti">
-
-        <h3>GIGABYTE B550M DS3H R2 AMD DDR4 MICRO ATX MOTHERBOARD </h3>
-
-        <div class="price">
-            ৳ 13,000 
-        </div>
-
-        <div class="stock">In Stock</div>
-
-        <div class="actions">
-            <button class="icon-btn">❤</button>
-            <button class="icon-btn">⇄</button>
-            <button class="icon-btn cart">🛒</button>
-        </div>
-
-        <button class="buy-btn">Buy Now</button>
-    </div>
-
-        <div class="product-card">
-        <span class="save-badge">Save: ৳ 2,000</span>
-        <img src="..//views/images/motherboard/cover-1766313180_cache_optimize-70.webp" alt="RTX 5070 Ti">
-
-        <h3>ASUS ROG CROSSHAIR X870E HERO BTF AM5 DDR5 ATX GAMMING MOTHERBOARD</h3>
-
-        <div class="price">
-            ৳ 113,500 
-        </div>
-
-        <div class="stock">In Stock</div>
-
-        <div class="actions">
-            <button class="icon-btn">❤</button>
-            <button class="icon-btn">⇄</button>
-            <button class="icon-btn cart">🛒</button>
-        </div>
-
-        <button class="buy-btn">Buy Now</button>
-    </div>
-
-        <div class="product-card">
-        <span class="save-badge">Save: ৳ 3,000</span>
-        <img src="../views/images/motherboard/cover-1766315755_cache_optimize-70.webp" alt="RTX 5070 Ti">
-
-        <h3>ASUS ROG STRIX X870E-H GAMING MOTHERBOARD </h3>
-
-        <div class="price">
-            ৳ 72,500 
-        </div>
-
-        <div class="stock">In Stock</div>
-
-        <div class="actions">
-            <button class="icon-btn">❤</button>
-            <button class="icon-btn">⇄</button>
-            <button class="icon-btn cart">🛒</button>
-        </div>
-
-        <button class="buy-btn">Buy Now</button>
-    </div>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p style="text-align:center; width:100%;">No motherboards available in the database.</p>
+    <?php endif; ?>
 </section>
 
 <script src="js/addtocart.js"></script>
-
 <?php include 'footer.php'; ?>
-
 </body>
 </html>

@@ -32,29 +32,27 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
 
     <div class="user-area">
-        <i class="fa-solid fa-cart-shopping" onclick="goToCart()"></i>
-        <i class="fa-regular fa-user user-icon" onclick="toggleLoginMenu()"></i>
+    <i class="fa-solid fa-cart-shopping" onclick="goToCart()"></i>
+    <i class="fa-regular fa-user user-icon" onclick="toggleLoginMenu()"></i>
 
-<div class="login-dropdown" id="loginDropdown">
-
+    <div class="login-dropdown" id="loginDropdown">
     <?php if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] === true): ?>
         <a href="profile_view.php" class="login-btn">Profile</a>
-        <a href="../controllers/LogoutController.php" class="logout-btn">
-            Logout
-        </a>
+
+        <?php if ($_SESSION['username'] === 'admin'): ?>
+            <a href="manage_item_view.php" class="login-btn">Product Management</a>
+            <a href="sorry.html" class="login-btn">Order Management</a>
+        <?php else: ?>
+            <a href="order_tracking.php" class="login-btn">Order Tracking</a>
+        <?php endif; ?>
+
+        <a href="../controllers/LogoutController.php" class="logout-btn">Logout</a>
 
     <?php else: ?>
-
-        
         <a href="loginView.php" class="login-btn">Sign In</a>
         <a href="registration_view.php" class="create-account">Create An Account</a>
-
     <?php endif; ?>
-
 </div>
-
-
-    </div>
     </header>
 
      <script >

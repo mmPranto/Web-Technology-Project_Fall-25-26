@@ -1,146 +1,74 @@
+<?php 
+session_start();
+require_once '../models/productModel.php'; 
+// Fetch only items where 'item' = 'ram'
+$ram_items = getProductsByCategory('ram'); 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Product Section</title>
+    <title>Desktop RAM - PCStation</title>
     <link rel="stylesheet" href="../views/css/Product.css">
+    <style>
+        /* Forces 4 items per row */
+        .product-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        /* Consistency for product titles */
+        .product-card h3 {
+            font-size: 14px;
+            height: 45px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
 
- <?php include 'header.php'; ?>
- <?php include 'nav.php'; ?>
+<?php include 'header.php'; ?>
+<?php include 'nav.php'; ?>
 
 <section class="product-section">
-    <div class="product-card">
-        <span class="save-badge">Save: ৳ 3,500</span>
-        <img src="../views/images/ram/cover-1759726490_cache_optimize-70.webp" alt="RTX 5070">
+    <?php if (!empty($ram_items)): ?>
+        <?php foreach ($ram_items as $product): ?>
+            <div class="product-card">
+                <span class="save-badge">Save Available</span>
+                
+                <img src="../views/images/ram/<?php echo htmlspecialchars($product['image']); ?>" 
+                     alt="<?php echo htmlspecialchars($product['product_name']); ?>">
 
-        <h3>KINGSTON FURY BEAST 32GB DDR5 6000MHz CL30 RGB DESKTOP RAM <BR></BR></h3>
+                <h3><?php echo htmlspecialchars($product['product_name']); ?></h3>
 
-        <div class="price">
-            ৳ 45,000 
-        </div>
+                <div class="price">
+                    ৳ <?php echo number_format($product['price']); ?>
+                </div>
 
-        <div class="stock">In Stock</div>
+                <div class="stock">In Stock</div>
 
-        <div class="actions">
-            <button class="icon-btn">❤</button>
-            <button class="icon-btn">⇄</button>
-            <button class="icon-btn cart">🛒</button>
-        </div>
+                <div class="actions">
+                    <button class="icon-btn">❤</button>
+                    <button class="icon-btn">⇄</button>
+                    <button class="icon-btn cart" 
+                            onclick="addToCart(<?php echo $product['price']; ?>, '<?php echo addslashes($product['product_name']); ?>')">
+                        🛒
+                    </button>
+                </div>
 
-        <button class="buy-btn">Buy Now</button>
-    </div>
-
-    <div class="product-card">
-        <span class="save-badge">Save: ৳ 4,000</span>
-        <img src="../views/images/ram/cover-1761457273_cache_optimize-70.webp" alt="RTX 5070 Ti">
-
-        <h3>CORSAIR VENGEANCE RGB 32GB (2x16GB) DDR5 DRAM 8000MT/s CL36 DESKTOP RAM</h3> <br>
-
-        <div class="price">
-            ৳ 55,000 
-        </div>
-
-        <div class="stock">In Stock</div>
-
-        <div class="actions">
-            <button class="icon-btn">❤</button>
-            <button class="icon-btn">⇄</button>
-            <button class="icon-btn cart">🛒</button>
-        </div>
-
-        <button class="buy-btn">Buy Now</button>
-    </div>
-
-    <div class="product-card">
-        <span class="save-badge">Save: ৳ 4,000</span>
-        <img src="../views/images/ram/cover-1765615406_cache_optimize-70.webp" alt="RTX 3050">
-
-        <h3>APACER NOX RGB 32GB DDR5 6000MHz CL38 GAMING DESKTOP RAM WITH HEATSINK</h3>
-
-        <div class="price">
-            ৳ 40,000
-        </div>
-
-        <div class="stock">In Stock</div>
-
-        <div class="actions">
-            <button class="icon-btn">❤</button>
-            <button class="icon-btn">⇄</button>
-            <button class="icon-btn cart">🛒</button>
-        </div>
-
-        <button class="buy-btn">Buy Now</button>
-    </div>
-
-        <div class="product-card">
-        <span class="save-badge">Save: ৳ 3,000</span>
-        <img src="../views/images/ram/cover-1766576084_cache_optimize-70.webp" alt="RTX 5070 Ti">
-
-        <h3>OCPC PISTA 32GB 6200MHz DDR5 CL40 DESKTOP RAM </h3>
-
-        <div class="price">
-            ৳ 42,000 
-        </div>
-
-        <div class="stock">In Stock</div>
-
-        <div class="actions">
-            <button class="icon-btn">❤</button>
-            <button class="icon-btn">⇄</button>
-            <button class="icon-btn cart">🛒</button>
-        </div>
-
-        <button class="buy-btn">Buy Now</button>
-    </div>
-
-        <div class="product-card">
-        <span class="save-badge">Save: ৳ 2,100</span>
-        <img src="../views/images/ram/cover_cache_optimize-70 (1).webp" alt="RTX 5070 Ti">
-
-        <h3>WALTON ANTIQUE WRL0836AS 8GB DDR4 3600MHZ RGB DESKTOP RAM</h3>
-
-        <div class="price">
-            ৳ 4,400 
-        </div>
-
-        <div class="stock">In Stock</div>
-
-        <div class="actions">
-            <button class="icon-btn">❤</button>
-            <button class="icon-btn">⇄</button>
-            <button class="icon-btn cart">🛒</button>
-        </div>
-
-        <button class="buy-btn">Buy Now</button>
-    </div>
-
-        <div class="product-card">
-        <span class="save-badge">Save: ৳ 2,000</span>
-        <img src="../views/images/ram/cover_cache_optimize-70.webp" alt="RTX 5070 Ti">
-
-        <h3>WALTON ANT WRL0836AS 16GB DDR4 3600MHZ RGB DESKTOP RAM</h3>
-
-        <div class="price">
-            ৳ 8,000 
-        </div>
-
-        <div class="stock">In Stock</div>
-
-        <div class="actions">
-            <button class="icon-btn">❤</button>
-            <button class="icon-btn">⇄</button>
-            <button class="icon-btn cart">🛒</button>
-        </div>
-
-        <button class="buy-btn">Buy Now</button>
-    </div>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p style="text-align:center; width:100%;">No RAM products found.</p>
+    <?php endif; ?>
 </section>
 
 <script src="js/addtocart.js"></script>
-
 <?php include 'footer.php'; ?>
-
 </body>
 </html>
