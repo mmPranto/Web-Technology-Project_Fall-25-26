@@ -21,11 +21,11 @@
         <span class="error-msg"><?php echo $_SESSION['firstnameErrMsg'] ?? ""; ?></span>
 
         <label>Last Name <span style="color: red;">*</span></label>
-        <input type="text" name="lname" id="lname" placeholder="Doe">
+        <input type="text" name="lname" id="lname" placeholder="Alex">
         <span class="error-msg"><?php echo $_SESSION['lastnameErrMsg'] ?? ""; ?></span>
 
         <label>Username <span id="uname-status" class="ajax-status"></span></label>
-        <input type="text" name="uname" id="uname" placeholder="johndoe123">
+        <input type="text" name="uname" id="uname" placeholder="johnalex123">
         <span class="error-msg"><?php echo $_SESSION['usernameErrMsg'] ?? ""; ?></span>
 
         <label>Email <span id="email-status" class="ajax-status"></span></label>
