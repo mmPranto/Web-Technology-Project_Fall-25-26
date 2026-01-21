@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../model/registration_model.php';
+require_once '../models/registration_model.php';
 
 $field = $_POST['field'];
 $value = $_POST['value'];
