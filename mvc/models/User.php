@@ -26,7 +26,7 @@ function matchCredentials($username, $password) {
 
 function updateUserPassword($username, $newPassword) {
     $conn = dbConnection();
-    // In a real app, use password_hash($newPassword, PASSWORD_DEFAULT)
+
     $stmt = $conn->prepare("UPDATE registration SET Password = ? WHERE Username = ?");
     $stmt->bind_param("ss", $newPassword, $username);
     $success = $stmt->execute();
