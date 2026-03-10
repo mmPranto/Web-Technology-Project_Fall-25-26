@@ -31,11 +31,11 @@ function updateProfile($fname, $lname, $uname, $email, $pass, $originalUname) {
     $conn = getDbConnection();
     
     if (!empty($pass)) {
-        // Update everything including password
+       
         $stmt = $conn->prepare("UPDATE registration SET First_name=?, Last_name=?, Username=?, Email=?, Password=? WHERE Username=?");
         $stmt->bind_param("ssssss", $fname, $lname, $uname, $email, $pass, $originalUname);
     } else {
-        // Update without changing password
+       
         $stmt = $conn->prepare("UPDATE registration SET First_name=?, Last_name=?, Username=?, Email=? WHERE Username=?");
         $stmt->bind_param("sssss", $fname, $lname, $uname, $email, $originalUname);
     }
@@ -53,7 +53,7 @@ function saveUser($fname, $lname, $uname, $email, $pass) {
         $conn->close();
         return $success;
     } catch (mysqli_sql_exception $e) {
-        // Log the error and return false instead of crashing
+        
         error_log($e->getMessage());
         return false;
     }
